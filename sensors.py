@@ -231,7 +231,7 @@ class IMU(Sensor):
 
         self._last_state_dict = measured_values
 
-        return tuple(measured_values.values())
+        return self._last_state_dict
     
     @property
     def last_state(self) -> tuple:
