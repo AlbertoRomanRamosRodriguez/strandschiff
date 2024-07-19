@@ -27,7 +27,7 @@ class ROV:
         self._imu = IMU(name,port,baudrate,timeout,wait_for_init)
 
       elif config["name"] == "gps":
-        PWR_MGMT_1, SMPLRT_DIV, CONFIG, GYRO_CONFIG, INT_ENABLE, DEV_ADDR, bus= tuple(config["pins"].values())
+        PWR_MGMT_1, SMPLRT_DIV, CONFIG, GYRO_CONFIG, INT_ENABLE, DEV_ADDR, bus = tuple(config["pins"].values())
 
         self._gps = GPS(PWR_MGMT_1, SMPLRT_DIV, CONFIG, GYRO_CONFIG, INT_ENABLE, DEV_ADDR, bus)
 
@@ -89,15 +89,15 @@ class ROV:
       gps_data = self._gps.measure()
     return imu_data, gps_data
 
-  def control_motors(self, duty_cycle1, duty_cycle2):
+  def control_motors(self, left_duty_cycle, right_duty_cycle):
     """
     Controls the speed of the two motors using PWM duty cycles (0-100).
 
     Args:
-      duty_cycle1 (int): The desired duty cycle for motor 1 (0-100).
-      duty_cycle2 (int): The desired duty cycle for motor 2 (0-100).
+      left_duty_cycle (int): The desired duty cycle for motor 1 (0-100).
+      right_duty_cycle (int): The desired duty cycle for motor 2 (0-100).
     """
     if self._motor1:
-      self._motor1.set_duty_cycle(duty_cycle1)
+      self._motor1.set_duty_cycle(left_duty_cycle)
     if self._motor2:
-      self._motor2.set_duty_cycle(duty_cycle2)
+      self._motor2.set_duty_cycle(right_duty_cycle)

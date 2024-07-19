@@ -17,7 +17,7 @@ class Motor:
     GPIO.setmode(GPIO.BCM)  # Set GPIO pin numbering mode
     GPIO.setup(self.pins["IN1"], GPIO.OUT)  # Set IN1 pin as output
     GPIO.setup(self.pins["IN2"], GPIO.OUT)  # Set IN2 pin as output
-    GPIO.setup(self.pins["ENA"], GPIO.OUT)  # Set ENA pin (PWM) as output
+    GPIO.setup(self.pins["EN"], GPIO.OUT)  # Set EN pin (PWM) as output
 
   def set_duty_cycle(self, duty_cycle):
     """
@@ -28,7 +28,7 @@ class Motor:
     """
     if 0 <= duty_cycle <= 100:
       self.duty_cycle = duty_cycle
-      pwm = GPIO.PWM(self.pins["ENA"], 1000)  # Create PWM instance with 1 kHz frequency
+      pwm = GPIO.PWM(self.pins["EN"], 1000)  # Create PWM instance with 1 kHz frequency
       pwm.start(duty_cycle)  # Start PWM with the specified duty cycle
     else:
       raise ValueError("Duty cycle must be between 0 and 100.")
@@ -55,4 +55,4 @@ class Motor:
     """
     GPIO.output(self.pins["IN1"], GPIO.LOW)  # Set both IN pins low to stop
     GPIO.output(self.pins["IN2"], GPIO.LOW)
-    GPIO.PWM(self.pins["ENA"], 0).stop  # Stop the PWM signal on ENA pin
+    GPIO.PWM(self.pins["EN"], 0).stop  # Stop the PWM signal on EN pin
